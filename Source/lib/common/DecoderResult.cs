@@ -53,6 +53,11 @@ namespace ZXing.Common
         public String ECLevel { get; private set; }
 
         /// <summary>
+        /// name of mask pattern used, or -1 if not applicable
+        /// </summary>
+        public int DataMask { get; private set; }
+
+        /// <summary>
         /// gets a value which describe if structure append data was found
         /// </summary>
         public bool StructuredAppend
@@ -116,6 +121,21 @@ namespace ZXing.Common
         /// initializing constructor
         /// </summary>
         /// <param name="rawBytes"></param>
+        /// <param name="text"></param>
+        /// <param name="byteSegments"></param>
+        /// <param name="ecLevel"></param>
+        /// <param name="dataMask"></param>
+        /// <param name="saSequence"></param>
+        /// <param name="saParity"></param>
+        public DecoderResult(byte[] rawBytes, String text, IList<byte[]> byteSegments, String ecLevel, int dataMask, int saSequence, int saParity)
+           : this(rawBytes, rawBytes == null ? 0 : 8 * rawBytes.Length, text, byteSegments, ecLevel, dataMask, saSequence, saParity)
+        {
+        }
+
+        /// <summary>
+        /// initializing constructor
+        /// </summary>
+        /// <param name="rawBytes"></param>
         /// <param name="numBits"></param>
         /// <param name="text"></param>
         /// <param name="byteSegments"></param>
@@ -146,6 +166,33 @@ namespace ZXing.Common
             Text = text;
             ByteSegments = byteSegments;
             ECLevel = ecLevel;
+            StructuredAppendParity = saParity;
+            StructuredAppendSequenceNumber = saSequence;
+        }
+
+        /// <summary>
+        /// initializing constructor
+        /// </summary>
+        /// <param name="rawBytes"></param>
+        /// <param name="numBits"></param>
+        /// <param name="text"></param>
+        /// <param name="byteSegments"></param>
+        /// <param name="ecLevel"></param>
+        /// <param name="dataMask"></param>
+        /// <param name="saSequence"></param>
+        /// <param name="saParity"></param>
+        public DecoderResult(byte[] rawBytes, int numBits, String text, IList<byte[]> byteSegments, String ecLevel, int dataMask, int saSequence, int saParity)
+        {
+            if (rawBytes == null && text == null)
+            {
+                throw new ArgumentException();
+            }
+            RawBytes = rawBytes;
+            NumBits = numBits;
+            Text = text;
+            ByteSegments = byteSegments;
+            ECLevel = ecLevel;
+            DataMask = dataMask;
             StructuredAppendParity = saParity;
             StructuredAppendSequenceNumber = saSequence;
         }

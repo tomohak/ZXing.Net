@@ -118,6 +118,7 @@ namespace ZXing.QrCode.Internal
             if (formatinfo == null)
                 return null;
             ErrorCorrectionLevel ecLevel = formatinfo.ErrorCorrectionLevel;
+            int dataMask = formatinfo.DataMask;
 
             // Read codewords
             byte[] codewords = parser.readCodewords();
@@ -149,7 +150,7 @@ namespace ZXing.QrCode.Internal
             }
 
             // Decode the contents of that stream of bytes
-            return DecodedBitStreamParser.decode(resultBytes, version, ecLevel, hints);
+            return DecodedBitStreamParser.decode(resultBytes, version, ecLevel, dataMask, hints);
         }
 
         /// <summary>

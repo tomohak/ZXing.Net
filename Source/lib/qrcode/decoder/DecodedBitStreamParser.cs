@@ -39,6 +39,7 @@ namespace ZXing.QrCode.Internal
         internal static DecoderResult decode(byte[] bytes,
                                              Version version,
                                              ErrorCorrectionLevel ecLevel,
+                                             int dataMask,
                                              IDictionary<DecodeHintType, object> hints)
         {
             var bits = new BitSource(bytes);
@@ -154,6 +155,7 @@ namespace ZXing.QrCode.Internal
                                      resultString,
                                      byteSegments.Count == 0 ? null : byteSegments,
                                      ecLevel == null ? null : ecLevel.ToString(),
+                                     dataMask,
                                      symbolSequence, parityData);
         }
 

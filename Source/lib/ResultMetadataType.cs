@@ -97,6 +97,11 @@ namespace ZXing
         /// <summary>
         /// Aztec-specific metadata
         /// </summary>
-        AZTEC_EXTRA_METADATA
+        AZTEC_EXTRA_METADATA,
+
+        /// <summary>
+        /// QR mask pattern used.
+        /// </summary>
+        MASK_PATTERN,
     }
 }

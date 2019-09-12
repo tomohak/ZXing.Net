@@ -109,6 +109,11 @@ namespace ZXing.QrCode
             {
                 result.putMetadata(ResultMetadataType.ERROR_CORRECTION_LEVEL, ecLevel);
             }
+            var dataMask = decoderResult.DataMask;
+            if (dataMask != -1)
+            {
+                result.putMetadata(ResultMetadataType.MASK_PATTERN, dataMask);
+            }
             if (decoderResult.StructuredAppend)
             {
                 result.putMetadata(ResultMetadataType.STRUCTURED_APPEND_SEQUENCE, decoderResult.StructuredAppendSequenceNumber);
