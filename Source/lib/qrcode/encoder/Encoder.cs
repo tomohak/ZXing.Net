@@ -194,6 +194,12 @@ namespace ZXing.QrCode.Internal
             if (maskPattern == -1)
             {
                 maskPattern = chooseMaskPattern(finalBits, ecLevel, version, matrix);
+                if (hints == null)
+                    hints = new Dictionary<EncodeHintType, object>();
+                if (hints.ContainsKey(EncodeHintType.QR_MASK_PATTERN))
+                    hints[EncodeHintType.QR_MASK_PATTERN] = maskPattern;
+                else
+                    hints.Add(EncodeHintType.QR_MASK_PATTERN, maskPattern);
             }
             qrCode.MaskPattern = maskPattern;
 
