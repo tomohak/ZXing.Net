@@ -114,6 +114,16 @@ namespace ZXing.QrCode
             {
                 result.putMetadata(ResultMetadataType.MASK_PATTERN, dataMask);
             }
+            var version = decoderResult.Version;
+            if (version != null)
+            {
+                result.putMetadata(ResultMetadataType.VERSION, version);
+            }
+            var mode = decoderResult.Mode;
+            if (mode != null)
+            {
+                result.putMetadata(ResultMetadataType.MODE, mode);
+            }
             if (decoderResult.StructuredAppend)
             {
                 result.putMetadata(ResultMetadataType.STRUCTURED_APPEND_SEQUENCE, decoderResult.StructuredAppendSequenceNumber);

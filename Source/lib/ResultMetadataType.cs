@@ -103,5 +103,15 @@ namespace ZXing
         /// QR mask pattern used.
         /// </summary>
         MASK_PATTERN,
+
+        /// <summary>
+        /// QR version used.
+        /// </summary>
+        VERSION,
+
+        /// <summary>
+        /// QR mode used.
+        /// </summary>
+        MODE
     }
 }

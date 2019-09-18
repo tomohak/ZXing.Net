@@ -47,6 +47,7 @@ namespace ZXing.QrCode.Internal
             var byteSegments = new List<byte[]>(1);
             var symbolSequence = -1;
             var parityData = -1;
+            Mode retMode = null;
 
             try
             {
@@ -136,6 +137,7 @@ namespace ZXing.QrCode.Internal
                                 default:
                                     return null;
                             }
+                            retMode = mode;
                             break;
                     }
                 } while (mode != Mode.TERMINATOR);
@@ -156,6 +158,8 @@ namespace ZXing.QrCode.Internal
                                      byteSegments.Count == 0 ? null : byteSegments,
                                      ecLevel == null ? null : ecLevel.ToString(),
                                      dataMask,
+                                     version,
+                                     retMode,
                                      symbolSequence, parityData);
         }
 

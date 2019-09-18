@@ -58,6 +58,16 @@ namespace ZXing.Common
         public int DataMask { get; private set; }
 
         /// <summary>
+        /// version used, or null if not applicable
+        /// </summary>
+        public ZXing.QrCode.Internal.Version Version { get; private set; }
+
+        /// <summary>
+        /// mode used, or null if not applicable
+        /// </summary>
+        public ZXing.QrCode.Internal.Mode Mode { get; private set; }
+
+        /// <summary>
         /// gets a value which describe if structure append data was found
         /// </summary>
         public bool StructuredAppend
@@ -127,8 +137,8 @@ namespace ZXing.Common
         /// <param name="dataMask"></param>
         /// <param name="saSequence"></param>
         /// <param name="saParity"></param>
-        public DecoderResult(byte[] rawBytes, String text, IList<byte[]> byteSegments, String ecLevel, int dataMask, int saSequence, int saParity)
-           : this(rawBytes, rawBytes == null ? 0 : 8 * rawBytes.Length, text, byteSegments, ecLevel, dataMask, saSequence, saParity)
+        public DecoderResult(byte[] rawBytes, String text, IList<byte[]> byteSegments, String ecLevel, int dataMask, QrCode.Internal.Version version, QrCode.Internal.Mode mode, int saSequence, int saParity)
+           : this(rawBytes, rawBytes == null ? 0 : 8 * rawBytes.Length, text, byteSegments, ecLevel, dataMask, version, mode, saSequence, saParity)
         {
         }
 
@@ -181,7 +191,7 @@ namespace ZXing.Common
         /// <param name="dataMask"></param>
         /// <param name="saSequence"></param>
         /// <param name="saParity"></param>
-        public DecoderResult(byte[] rawBytes, int numBits, String text, IList<byte[]> byteSegments, String ecLevel, int dataMask, int saSequence, int saParity)
+        public DecoderResult(byte[] rawBytes, int numBits, String text, IList<byte[]> byteSegments, String ecLevel, int dataMask, QrCode.Internal.Version version, QrCode.Internal.Mode mode, int saSequence, int saParity)
         {
             if (rawBytes == null && text == null)
             {
@@ -193,6 +203,8 @@ namespace ZXing.Common
             ByteSegments = byteSegments;
             ECLevel = ecLevel;
             DataMask = dataMask;
+            Version = version;
+            Mode = mode;
             StructuredAppendParity = saParity;
             StructuredAppendSequenceNumber = saSequence;
         }
